@@ -42,6 +42,35 @@ servers:
 # Holds the relative paths to the individual endpoints. The path is appended to the
 # basePath in order to construct the full URL.
 paths:
+  '/mlapp':
+    get: # documentation for GET operation for this path
+      tags:
+        - App
+
+      # summary is up to 120 symbold but we recommend to be shortest as possible
+      summary: Get ML applications
+
+      # you can use GFM in operation description too: https://guides.github.com/features/mastering-markdown
+      description: |
+        Some description of the operation.
+        You can use `markdown` here.
+
+      # operationId should be unique across the whole specification
+      operationId: getMLApps
+
+      responses: # list of responses
+        '200':
+          description: Success
+          content:
+            application/json: # operation response mime type
+              schema: # response schema can be specified for each response
+                $ref: '#/components/schemas/MLApp'
+              example: # response example
+                appname: fooapp
+        '403':
+          description: Forbidden
+        '404':
+          description: Application not found
   '/mlapp/{appname}':
     get: # documentation for GET operation for this path
       tags:
